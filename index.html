@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindMySpot - Find Your Perfect Parking Spot</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/landing.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="nav-brand">
+                <div class="logo">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>FindMySpot</span>
+                </div>
+            </div>
+            
+            <nav class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-ghost">Login</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+            
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="word">Find</span>
+                    <span class="word">Your</span>
+                    <span class="word">Perfect</span>
+                    <span class="word">Parking</span>
+                    <span class="word">Spot.</span>
+                </h1>
+                <p class="hero-subtitle">Discover convenient parking spaces or earn money by listing your unused spots. Join thousands of users making parking effortless.</p>
+                <div class="hero-buttons">
+                    <a href="search.html" class="btn btn-primary btn-large">
+                        <i class="fas fa-search"></i>
+                        Find Parking
+                    </a>
+                    <a href="register.html" class="btn btn-secondary btn-large">
+                        <i class="fas fa-plus"></i>
+                        List Your Spot
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Choose FindMySpot?</h2>
+                <p class="section-subtitle">Experience the future of parking with our innovative platform</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefits-column">
+                    <h3 class="column-title">For Customers</h3>
+                    <div class="benefit-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="benefit-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h4>Instant Booking</h4>
+                        <p>Book your parking spot in seconds with our streamlined process</p>
+                    </div>
+                    
+                    <div class="benefit-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="benefit-icon">
+                            <i class="fas fa-map"></i>
+                        </div>
+                        <h4>Map View</h4>
+                        <p>Find spots near you with our interactive map interface</p>
+                    </div>
+                    
+                    <div class="benefit-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="benefit-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>No Hidden Charges</h4>
+                        <p>Transparent pricing with no surprise fees or hidden costs</p>
+                    </div>
+                    
+                    <div class="benefit-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="benefit-icon">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <h4>Cancel Anytime</h4>
+                        <p>Flexible cancellation policy for your peace of mind</p>
+                    </div>
+                </div>
+                
+                <div class="benefits-column">
+                    <h3 class="column-title">For Hosts</h3>
+                    <div class="benefit-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="benefit-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <h4>Earn Passive Income</h4>
+                        <p>Turn your unused parking space into a steady income stream</p>
+                    </div>
+                    
+                    <div class="benefit-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="benefit-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <h4>Total Control</h4>
+                        <p>Set your own prices, availability, and booking rules</p>
+                    </div>
+                    
+                    <div class="benefit-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="benefit-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h4>Flexible Pricing</h4>
+                        <p>Adjust rates based on demand, time, and special events</p>
+                    </div>
+                    
+                    <div class="benefit-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="benefit-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h4>Secure Platform</h4>
+                        <p>Protected transactions and verified users for your safety</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Simple steps to get started</p>
+            </div>
+            
+            <div class="workflows">
+                <div class="workflow">
+                    <h3 class="workflow-title">For Customers</h3>
+                    <div class="timeline">
+                        <div class="timeline-item" data-aos="fade-right" data-aos-delay="100">
+                            <div class="timeline-number">1</div>
+                            <div class="timeline-content">
+                                <h4>Search</h4>
+                                <p>Enter your location and find available parking spots</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item" data-aos="fade-right" data-aos-delay="200">
+                            <div class="timeline-number">2</div>
+                            <div class="timeline-content">
+                                <h4>Filter</h4>
+                                <p>Use filters to find spots that match your needs</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item" data-aos="fade-right" data-aos-delay="300">
+                            <div class="timeline-number">3</div>
+                            <div class="timeline-content">
+                                <h4>Book</h4>
+                                <p>Reserve your spot with instant confirmation</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item" data-aos="fade-right" data-aos-delay="400">
+                            <div class="timeline-number">4</div>
+                            <div class="timeline-content">
+                                <h4>Park</h4>
+                                <p>Arrive and park with confidence</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="workflow">
+                    <h3 class="workflow-title">For Hosts</h3>
+                    <div class="timeline">
+                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="100">
+                            <div class="timeline-number">1</div>
+                            <div class="timeline-content">
+                                <h4>Register</h4>
+                                <p>Sign up as a host and verify your account</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="200">
+                            <div class="timeline-number">2</div>
+                            <div class="timeline-content">
+                                <h4>Add Spot</h4>
+                                <p>List your parking space with photos and details</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="300">
+                            <div class="timeline-number">3</div>
+                            <div class="timeline-content">
+                                <h4>Get Booked</h4>
+                                <p>Receive bookings from customers in your area</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="400">
+                            <div class="timeline-number">4</div>
+                            <div class="timeline-content">
+                                <h4>Earn</h4>
+                                <p>Get paid automatically for each booking</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What Our Users Say</h2>
+                <p class="section-subtitle">Join thousands of satisfied customers and hosts</p>
+            </div>
+            
+            <div class="testimonials-carousel">
+                <div class="carousel-container">
+                    <div class="testimonial-card active">
+                        <div class="testimonial-content">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>"FindMySpot saved me so much time and stress. I found a perfect parking spot right next to my office building!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <img src="https://images.unsplash.com/photo-1494790108755-2616b9e0e4d4?w=100&h=100&fit=crop&crop=face" alt="Sarah Johnson">
+                            </div>
+                            <div class="author-info">
+                                <h4>Sarah Johnson</h4>
+                                <span>Customer</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>"I'm earning extra income from my unused driveway. The platform is easy to use and payments are always on time."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Mike Chen">
+                            </div>
+                            <div class="author-info">
+                                <h4>Mike Chen</h4>
+                                <span>Host</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>"The map feature is fantastic! I can see exactly where the parking spot is and how to get there."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="Emily Davis">
+                            </div>
+                            <div class="author-info">
+                                <h4>Emily Davis</h4>
+                                <span>Customer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-nav">
+                    <button class="nav-btn prev-btn" id="prevBtn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="carousel-dots">
+                        <span class="dot active" data-slide="0"></span>
+                        <span class="dot" data-slide="1"></span>
+                        <span class="dot" data-slide="2"></span>
+                    </div>
+                    <button class="nav-btn next-btn" id="nextBtn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">How It Works</a></li>
+                        <li><a href="#">Safety</a></li>
+                        <li><a href="#">Trust & Safety</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="search.html">Find Parking</a></li>
+                        <li><a href="register.html">List Your Spot</a></li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="#">Mobile App</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Help Center</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Report Issue</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> support@findmyspot.com</li>
+                        <li><i class="fas fa-phone"></i> +880 1234-567890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</li>
+                        <li class="social-links">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 FindMySpot. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/global.js"></script>
+    <script src="scripts/landing.js"></script>
+</body>
+</html>
