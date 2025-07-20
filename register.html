@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - FindMySpot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <div class="register-page">
+        <div class="register-background">
+            <img src="https://images.unsplash.com/photo-1590674899484-d5640e854abe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Parking" class="bg-image">
+            <div class="register-overlay"></div>
+        </div>
+        
+        <div class="register-container">
+            <div class="register-card glass-card">
+                <div class="register-header">
+                    <h2>Join FindMySpot</h2>
+                    <div class="logo-small">FindMySpot</div>
+                </div>
+                
+                <div class="role-toggle">
+                    <button class="toggle-btn active" data-role="customer">Customer</button>
+                    <button class="toggle-btn" data-role="host">Host</button>
+                </div>
+                
+                <!-- Customer Registration Form -->
+                <form class="register-form customer-form active" id="customerForm">
+                    <div class="form-group">
+                        <label for="customerName">Full Name</label>
+                        <input type="text" id="customerName" name="name" required>
+                        <div class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerEmail">Email</label>
+                        <input type="email" id="customerEmail" name="email" required>
+                        <div class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerPhone">Phone Number</label>
+                        <input type="tel" id="customerPhone" name="phone" required>
+                        <div class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerPassword">Password</label>
+                        <input type="password" id="customerPassword" name="password" required>
+                        <div class="password-strength"></div>
+                        <div class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerConfirmPassword">Confirm Password</label>
+                        <input type="password" id="customerConfirmPassword" name="confirmPassword" required>
+                        <div class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerID">ID Verification (Optional)</label>
+                        <input type="file" id="customerID" name="idFile" accept="image/*">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+                </form>
+                
+                <!-- Host Registration Form -->
+                <form class="register-form host-form" id="hostForm">
+                    <div class="form-group">
+                        <label for="hostName">Full Name</label>
+                        <input type="text" id="hostName" name="name" required>
+                        <div class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="hostEmail">Email</label>
+                        <input type="email" id="hostEmail" name="email" required>
+                        <div class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="hostPhone">Phone Number</label>
+                        <input type="tel" id="hostPhone" name="phone" required>
+                        <div class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="hostAddress">Address</label>
+                        <textarea id="hostAddress" name="address" rows="3" required></textarea>
+                        <div class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="hostPassword">Password</label>
+                        <input type="password" id="hostPassword" name="password" required>
+                        <div class="password-strength"></div>
+                        <div class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="hostConfirmPassword">Confirm Password</label>
+                        <input type="password" id="hostConfirmPassword" name="confirmPassword" required>
+                        <div class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="hostDocuments">License/Utility Bill (Optional)</label>
+                        <input type="file" id="hostDocuments" name="documents" accept="image/*,.pdf" multiple>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-full">Become a Host</button>
+                </form>
+                
+                <div class="register-footer">
+                    <p>Already have an account? <a href="login.html">Login here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content glass-card">
+            <div class="success-icon">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22,4 12,14.01 9,11.01"></polyline>
+                </svg>
+            </div>
+            <h3>Registration Successful!</h3>
+            <p>Welcome to FindMySpot! You can now start using our platform.</p>
+            <button class="btn btn-primary" onclick="closeSuccessModal()">Continue</button>
+        </div>
+    </div>
+
+    <script src="js/register.js"></script>
+</body>
+</html>

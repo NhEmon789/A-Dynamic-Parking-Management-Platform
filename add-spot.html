@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Parking Spot - FindMySpot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <h2>FindMySpot</h2>
+                </div>
+                <nav class="nav-menu" id="navMenu">
+                    <ul class="nav-list">
+                        <li><a href="host-dashboard.html" class="nav-link">Dashboard</a></li>
+                        <li><a href="host-listings.html" class="nav-link">Listings</a></li>
+                        <li><a href="host-bookings.html" class="nav-link">Bookings</a></li>
+                        <li><a href="host-earnings.html" class="nav-link">Earnings</a></li>
+                    </ul>
+                    <div class="user-actions mobile">
+                        <div class="role-switch">
+                            <a href="customer-dashboard.html" class="btn btn-ghost role-toggle" id="roleToggle">Switch to Customer</a>
+                        </div>
+                        <button class="btn btn-primary" onclick="logout()">Logout</button>
+                    </div>
+                </nav>
+                <div class="user-actions desktop">
+                    <div class="role-switch">
+<a href="customer-dashboard.html" class="btn btn-ghost role-toggle" id="roleToggle" style="color:#fff;">Switch to Customer</a>
+                    </div>
+                    <button class="btn btn-primary" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="add-spot-page">
+        <div class="container">
+            <div class="page-header">
+                <h1>Add New Parking Spot</h1>
+                <p>List your parking space and start earning</p>
+            </div>
+
+            <form class="add-spot-form" id="addSpotForm">
+                <div class="form-sections">
+                    <!-- Basic Information -->
+                    <div class="form-section glass-card">
+                        <h2>Basic Information</h2>
+                        <div class="form-group">
+                            <label for="spotName">Spot Name</label>
+                            <input type="text" id="spotName" name="spotName" placeholder="e.g., Downtown Garage, Residential Driveway" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea id="description" name="description" rows="4" placeholder="Describe your parking spot, access instructions, and any important details..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="form-section glass-card">
+                        <h2>Location</h2>
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" name="address" placeholder="Enter full address" required>
+                        </div>
+                        <div class="map-section">
+                            <label>Pin Your Location</label>
+                            <div id="addSpotMap" class="map-container"></div>
+                            <p class="map-help">Click on the map to set your parking spot location</p>
+                        </div>
+                    </div>
+
+                    <!-- Photos -->
+                    <div class="form-section glass-card">
+                        <h2>Photos</h2>
+                        <div class="photo-upload">
+                            <div class="upload-area" id="uploadArea">
+                                <div class="upload-icon">
+                                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2v11z"></path>
+                                        <circle cx="12" cy="13" r="4"></circle>
+                                    </svg>
+                                </div>
+                                <h3>Upload Photos</h3>
+                                <p>Add up to 5 photos of your parking spot</p>
+                                <input type="file" id="photoUpload" multiple accept="image/*" max="5">
+                                <button type="button" class="btn btn-primary" onclick="document.getElementById('photoUpload').click()">Choose Files</button>
+                            </div>
+                            <div class="photo-preview" id="photoPreview"></div>
+                        </div>
+                    </div>
+
+                    <!-- Pricing & Availability -->
+                    <div class="form-section glass-card">
+                        <h2>Pricing & Availability</h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="hourlyRate">Hourly Rate ($)</label>
+                                <input type="number" id="hourlyRate" name="hourlyRate" min="1" step="0.50" placeholder="8.00" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="currency">Currency</label>
+                                <select id="currency" name="currency">
+                                    <option value="USD">USD ($)</option>
+                                    <option value="EUR">EUR (€)</option>
+                                    <option value="GBP">GBP (£)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="availability-section">
+                            <h3>Availability</h3>
+                            <div class="availability-grid">
+                                <div class="day-availability">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" name="days" value="monday" checked>
+                                        Monday
+                                    </label>
+                                    <div class="time-range">
+                                        <select name="monday_start">
+                                            <option value="00:00">12:00 AM</option>
+                                            <option value="01:00">1:00 AM</option>
+                                            <option value="02:00">2:00 AM</option>
+                                            <option value="03:00">3:00 AM</option>
+                                            <option value="04:00">4:00 AM</option>
+                                            <option value="05:00">5:00 AM</option>
+                                            <option value="06:00">6:00 AM</option>
+                                            <option value="07:00">7:00 AM</option>
+                                            <option value="08:00" selected>8:00 AM</option>
+                                            <option value="09:00">9:00 AM</option>
+                                            <option value="10:00">10:00 AM</option>
+                                            <option value="11:00">11:00 AM</option>
+                                            <option value="12:00">12:00 PM</option>
+                                            <option value="13:00">1:00 PM</option>
+                                            <option value="14:00">2:00 PM</option>
+                                            <option value="15:00">3:00 PM</option>
+                                            <option value="16:00">4:00 PM</option>
+                                            <option value="17:00">5:00 PM</option>
+                                            <option value="18:00">6:00 PM</option>
+                                            <option value="19:00">7:00 PM</option>
+                                            <option value="20:00">8:00 PM</option>
+                                            <option value="21:00">9:00 PM</option>
+                                            <option value="22:00">10:00 PM</option>
+                                            <option value="23:00">11:00 PM</option>
+                                        </select>
+                                        <span>to</span>
+                                        <select name="monday_end">
+                                            <option value="01:00">1:00 AM</option>
+                                            <option value="02:00">2:00 AM</option>
+                                            <option value="03:00">3:00 AM</option>
+                                            <option value="04:00">4:00 AM</option>
+                                            <option value="05:00">5:00 AM</option>
+                                            <option value="06:00">6:00 AM</option>
+                                            <option value="07:00">7:00 AM</option>
+                                            <option value="08:00">8:00 AM</option>
+                                            <option value="09:00">9:00 AM</option>
+                                            <option value="10:00">10:00 AM</option>
+                                            <option value="11:00">11:00 AM</option>
+                                            <option value="12:00">12:00 PM</option>
+                                            <option value="13:00">1:00 PM</option>
+                                            <option value="14:00">2:00 PM</option>
+                                            <option value="15:00">3:00 PM</option>
+                                            <option value="16:00">4:00 PM</option>
+                                            <option value="17:00">5:00 PM</option>
+                                            <option value="18:00" selected>6:00 PM</option>
+                                            <option value="19:00">7:00 PM</option>
+                                            <option value="20:00">8:00 PM</option>
+                                            <option value="21:00">9:00 PM</option>
+                                            <option value="22:00">10:00 PM</option>
+                                            <option value="23:00">11:00 PM</option>
+                                            <option value="23:59">11:59 PM</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Repeat for other days -->
+                                <div class="day-availability">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" name="days" value="tuesday" checked>
+                                        Tuesday
+                                    </label>
+                                    <div class="time-range">
+                                        <select name="tuesday_start">
+                                            <option value="08:00" selected>8:00 AM</option>
+                                        </select>
+                                        <span>to</span>
+                                        <select name="tuesday_end">
+                                            <option value="18:00" selected>6:00 PM</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="day-availability">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" name="days" value="wednesday" checked>
+                                        Wednesday
+                                    </label>
+                                    <div class="time-range">
+                                        <select name="wednesday_start">
+                                            <option value="08:00" selected>8:00 AM</option>
+                                        </select>
+                                        <span>to</span>
+                                        <select name="wednesday_end">
+                                            <option value="18:00" selected>6:00 PM</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="day-availability">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" name="days" value="thursday" checked>
+                                        Thursday
+                                    </label>
+                                    <div class="time-range">
+                                        <select name="thursday_start">
+                                            <option value="08:00" selected>8:00 AM</option>
+                                        </select>
+                                        <span>to</span>
+                                        <select name="thursday_end">
+                                            <option value="18:00" selected>6:00 PM</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="day-availability">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" name="days" value="friday" checked>
+                                        Friday
+                                    </label>
+                                    <div class="time-range">
+                                        <select name="friday_start">
+                                            <option value="08:00" selected>8:00 AM</option>
+                                        </select>
+                                        <span>to</span>
+                                        <select name="friday_end">
+                                            <option value="18:00" selected>6:00 PM</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="day-availability">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" name="days" value="saturday">
+                                        Saturday
+                                    </label>
+                                    <div class="time-range">
+                                        <select name="saturday_start">
+                                            <option value="08:00" selected>8:00 AM</option>
+                                        </select>
+                                        <span>to</span>
+                                        <select name="saturday_end">
+                                            <option value="18:00" selected>6:00 PM</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="day-availability">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" name="days" value="sunday">
+                                        Sunday
+                                    </label>
+                                    <div class="time-range">
+                                        <select name="sunday_start">
+                                            <option value="08:00" selected>8:00 AM</option>
+                                        </select>
+                                        <span>to</span>
+                                        <select name="sunday_end">
+                                            <option value="18:00" selected>6:00 PM</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vehicle Types -->
+                    <div class="form-section glass-card">
+                        <h2>Supported Vehicle Types</h2>
+                        <div class="vehicle-types-grid">
+                            <label class="vehicle-type-option">
+                                <input type="checkbox" name="vehicleTypes" value="sedan" checked>
+                                <div class="vehicle-card">
+                                    <div class="vehicle-icon">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18.4 9H5.6L3.5 11.1C2.7 11.3 2 12.1 2 13v3c0 .6.4 1 1 1h2"></path>
+                                            <circle cx="7" cy="17" r="2"></circle>
+                                            <path d="M9 17h6"></path>
+                                            <circle cx="17" cy="17" r="2"></circle>
+                                        </svg>
+                                    </div>
+                                    <h4>Sedan</h4>
+                                    <p>14-16 feet</p>
+                                </div>
+                            </label>
+                            <label class="vehicle-type-option">
+                                <input type="checkbox" name="vehicleTypes" value="suv" checked>
+                                <div class="vehicle-card">
+                                    <div class="vehicle-icon">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18.4 9H5.6L3.5 11.1C2.7 11.3 2 12.1 2 13v3c0 .6.4 1 1 1h2"></path>
+                                            <circle cx="7" cy="17" r="2"></circle>
+                                            <path d="M9 17h6"></path>
+                                            <circle cx="17" cy="17" r="2"></circle>
+                                            <path d="M2 8h20"></path>
+                                        </svg>
+                                    </div>
+                                    <h4>SUV</h4>
+                                    <p>16-18 feet</p>
+                                </div>
+                            </label>
+                            <label class="vehicle-type-option">
+                                <input type="checkbox" name="vehicleTypes" value="hatchback" checked>
+                                <div class="vehicle-card">
+                                    <div class="vehicle-icon">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18.4 9H5.6L3.5 11.1C2.7 11.3 2 12.1 2 13v3c0 .6.4 1 1 1h2"></path>
+                                            <circle cx="7" cy="17" r="2"></circle>
+                                            <path d="M9 17h6"></path>
+                                            <circle cx="17" cy="17" r="2"></circle>
+                                        </svg>
+                                    </div>
+                                    <h4>Hatchback</h4>
+                                    <p>12-14 feet</p>
+                                </div>
+                            </label>
+                            <label class="vehicle-type-option">
+                                <input type="checkbox" name="vehicleTypes" value="minivan">
+                                <div class="vehicle-card">
+                                    <div class="vehicle-icon">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18.4 9H5.6L3.5 11.1C2.7 11.3 2 12.1 2 13v3c0 .6.4 1 1 1h2"></path>
+                                            <circle cx="7" cy="17" r="2"></circle>
+                                            <path d="M9 17h6"></path>
+                                            <circle cx="17" cy="17" r="2"></circle>
+                                            <path d="M2 8h20"></path>
+                                            <path d="M7 8v8"></path>
+                                            <path d="M17 8v8"></path>
+                                        </svg>
+                                    </div>
+                                    <h4>Minivan</h4>
+                                    <p>18-20 feet</p>
+                                </div>
+                            </label>
+                            <label class="vehicle-type-option">
+                                <input type="checkbox" name="vehicleTypes" value="truck">
+                                <div class="vehicle-card">
+                                    <div class="vehicle-icon">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
+                                            <path d="M15 18H9"></path>
+                                            <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
+                                            <circle cx="17" cy="18" r="2"></circle>
+                                            <circle cx="7" cy="18" r="2"></circle>
+                                        </svg>
+                                    </div>
+                                    <h4>Truck</h4>
+                                    <p>20+ feet</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Amenities -->
+                    <div class="form-section glass-card">
+                        <h2>Amenities</h2>
+                        <div class="amenities-grid">
+                            <label class="amenity-option">
+                                <input type="checkbox" name="amenities" value="covered">
+                                <div class="amenity-card">
+                                    <div class="amenity-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M3 21h18"></path>
+                                            <path d="M5 21V7l8-4v18"></path>
+                                            <path d="M19 21V11l-6-4"></path>
+                                        </svg>
+                                    </div>
+                                    <span>Covered</span>
+                                </div>
+                            </label>
+                            <label class="amenity-option">
+                                <input type="checkbox" name="amenities" value="security">
+                                <div class="amenity-card">
+                                    <div class="amenity-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                        </svg>
+                                    </div>
+                                    <span>Security</span>
+                                </div>
+                            </label>
+                            <label class="amenity-option">
+                                <input type="checkbox" name="amenities" value="ev">
+                                <div class="amenity-card">
+                                    <div class="amenity-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                                        </svg>
+                                    </div>
+                                    <span>EV Charging</span>
+                                </div>
+                            </label>
+                            <label class="amenity-option">
+                                <input type="checkbox" name="amenities" value="handicap">
+                                <div class="amenity-card">
+                                    <div class="amenity-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="4" r="2"></circle>
+                                            <path d="M19 13v-2a7 7 0 0 0-14 0v2"></path>
+                                            <path d="M12 14l-8 4 2 3h12l2-3-8-4Z"></path>
+                                        </svg>
+                                    </div>
+                                    <span>Handicap Access</span>
+                                </div>
+                            </label>
+                            <label class="amenity-option">
+                                <input type="checkbox" name="amenities" value="24_7">
+                                <div class="amenity-card">
+                                    <div class="amenity-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <polyline points="12,6 12,12 16,14"></polyline>
+                                        </svg>
+                                    </div>
+                                    <span>24/7 Access</span>
+                                </div>
+                            </label>
+                            <label class="amenity-option">
+                                <input type="checkbox" name="amenities" value="lighting">
+                                <div class="amenity-card">
+                                    <div class="amenity-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="5"></circle>
+                                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                        </svg>
+                                    </div>
+                                    <span>Well Lit</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-ghost" onclick="saveDraft()">Save Draft</button>
+                        <button type="submit" class="btn btn-primary">Publish Spot</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="success-icon">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22,4 12,14.01 9,11.01"></polyline>
+                </svg>
+            </div>
+            <h3>Spot Added Successfully!</h3>
+            <p>Your parking spot has been listed and is now available for booking.</p>
+            <div class="modal-actions">
+                <button class="btn btn-ghost" onclick="closeSuccessModal()">Add Another Spot</button>
+                <button class="btn btn-primary" onclick="goToListings()">View My Listings</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/add-spot.js"></script>
+</body>
+</html>

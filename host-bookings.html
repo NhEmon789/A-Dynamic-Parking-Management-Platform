@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Host Bookings - FindMySpot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <h2>FindMySpot</h2>
+                </div>
+                <nav class="nav-menu" id="navMenu">
+                    <ul class="nav-list">
+                        <li><a href="host-dashboard.html" class="nav-link">Dashboard</a></li>
+                        <li><a href="host-listings.html" class="nav-link">Listings</a></li>
+                        <li><a href="host-bookings.html" class="nav-link active">Bookings</a></li>
+                        <li><a href="host-earnings.html" class="nav-link">Earnings</a></li>
+                    </ul>
+                    <div class="user-actions mobile">
+                        <div class="role-switch">
+                            <a href="customer-dashboard.html" class="btn btn-ghost role-toggle" id="roleToggle">Switch to Customer</a>
+                        </div>
+                        <button class="btn btn-primary" onclick="logout()">Logout</button>
+                    </div>
+                </nav>
+                <div class="user-actions desktop">
+                    <div class="role-switch">
+<a href="customer-dashboard.html" class="btn btn-ghost role-toggle" id="roleToggle" style="color:#fff;">Switch to Customer</a>
+                    </div>
+                    <button class="btn btn-primary" onclick="logout()">Logout</button>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="bookings-page" style="padding-top: 120px;">
+        <div class="container">
+            <div class="page-header">
+                <h1>My Bookings</h1>
+                <p>Manage all your parking spot bookings</p>
+            </div>
+
+            <div class="bookings-tabs">
+                <button class="tab-btn active" onclick="showTab('upcoming')">Upcoming</button>
+                <button class="tab-btn" onclick="showTab('past')">Past</button>
+                <button class="tab-btn" onclick="showTab('cancelled')">Cancelled</button>
+            </div>
+
+            <div class="bookings-content">
+                <!-- Upcoming Bookings -->
+                <div class="tab-content active" id="upcoming">
+                    <div class="bookings-table glass-card">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Spot</th>
+                                    <th>Date</th>
+                                    <th>Duration</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="customer-info">
+                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face" alt="Customer">
+                                            <span>John Smith</span>
+                                        </div>
+                                    </td>
+                                    <td>Downtown Garage</td>
+                                    <td>Dec 15, 2024</td>
+                                    <td>4 hours</td>
+                                    <td>$32.00</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-ghost">Contact</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="customer-info">
+                                            <img src="https://images.unsplash.com/photo-1494790108755-2616b9461e25?w=40&h=40&fit=crop&crop=face" alt="Customer">
+                                            <span>Emma Davis</span>
+                                        </div>
+                                    </td>
+                                    <td>Residential Driveway</td>
+                                    <td>Dec 16, 2024</td>
+                                    <td>6 hours</td>
+                                    <td>$30.00</td>
+                                    <td><span class="status-badge confirmed">Confirmed</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-ghost">Contact</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Past Bookings -->
+                <div class="tab-content" id="past">
+                    <div class="bookings-table glass-card">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Spot</th>
+                                    <th>Date</th>
+                                    <th>Duration</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="customer-info">
+                                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" alt="Customer">
+                                            <span>Mike Johnson</span>
+                                        </div>
+                                    </td>
+                                    <td>Office Building</td>
+                                    <td>Dec 13, 2024</td>
+                                    <td>8 hours</td>
+                                    <td>$48.00</td>
+                                    <td><span class="status-badge completed">Completed</span></td>
+                                    <td>⭐⭐⭐⭐⭐</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="customer-info">
+                                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face" alt="Customer">
+                                            <span>Sarah Wilson</span>
+                                        </div>
+                                    </td>
+                                    <td>Downtown Garage</td>
+                                    <td>Dec 12, 2024</td>
+                                    <td>5 hours</td>
+                                    <td>$40.00</td>
+                                    <td><span class="status-badge completed">Completed</span></td>
+                                    <td>⭐⭐⭐⭐☆</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Cancelled Bookings -->
+                <div class="tab-content" id="cancelled">
+                    <div class="bookings-table glass-card">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Spot</th>
+                                    <th>Date</th>
+                                    <th>Duration</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Reason</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="customer-info">
+                                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=40&h=40&fit=crop&crop=face" alt="Customer">
+                                            <span>Alex Brown</span>
+                                        </div>
+                                    </td>
+                                    <td>Residential Driveway</td>
+                                    <td>Dec 10, 2024</td>
+                                    <td>3 hours</td>
+                                    <td>$15.00</td>
+                                    <td><span class="status-badge cancelled">Cancelled</span></td>
+                                    <td>Customer Request</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Help Center</h4>
+                    <ul>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Safety</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li>Email: support@findmyspot.com</li>
+                        <li>Phone: +1 (555) 123-4567</li>
+                        <li>Address: 123 Parking St, City, Country</li>
+                        <li>Hours: 24/7 Support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        function showTab(tabName) {
+            // Update active tab button
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            tabBtns.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase() === tabName) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Update active tab content
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+                if (content.id === tabName) {
+                    content.classList.add('active');
+                }
+            });
+        }
+
+        function logout() {
+            localStorage.removeItem('user_data');
+            sessionStorage.removeItem('user_data');
+            window.location.href = 'index.html';
+        }
+
+        // Role toggle functionality
+        document.getElementById('roleToggle').addEventListener('click', function() {
+            window.location.href = 'customer-dashboard.html';
+        });
+    </script>
+</body>
+</html>
