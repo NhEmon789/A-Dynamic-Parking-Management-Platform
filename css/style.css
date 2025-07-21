@@ -1537,6 +1537,21 @@ body {
     margin-bottom: 30px;
 }
 
+/* Pill-shaped glassy background for toggle buttons */
+.toggle-pill.glass-pill {
+    display: flex;
+    gap: 0.5rem;
+    background: rgba(255,255,255,0.18);
+    border-radius: 999px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    padding: 0.25rem 0.5rem;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.22);
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
 .login-form {
     display: flex;
     flex-direction: column;
