@@ -1,13 +1,4 @@
-@media (max-width: 900px) {
-  .sidebar-toggle {
-    display: flex !important;
-  }
-  .search-sidebar {
-    display: none !important;
-  }
-}
 /* Make Leaflet popup close (cross) button bigger, more visible, and easier to access */
-/* Slightly increase the size of the Leaflet popup close (cross) button */
 .leaflet-popup-close-button {
   width: 28px;
   height: 28px;
@@ -1133,7 +1124,6 @@ body {
     padding-right: 20px;
 }
 
-
 .sidebar-toggle {
     display: none;
     position: fixed;
@@ -1152,18 +1142,6 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-@media (max-width: 900px) {
-  .sidebar-toggle {
-    display: flex;
-  }
-}
-
-@media (min-width: 901px) {
-  .sidebar-toggle {
-    display: none !important;
-  }
-}
-
 .search-sidebar {
     background: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(16px);
@@ -1177,7 +1155,7 @@ body {
 }
 
 .sidebar-header {
-    display: none;
+    display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
@@ -3478,12 +3456,6 @@ body {
         z-index: 1001;
         transition: left 0.3s ease;
         overflow-y: auto;
-        scrollbar-width: none; /* Firefox */
-    }
-
-    .search-sidebar::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, Opera */
-    }
     }
     
     .search-sidebar.active {
@@ -3527,7 +3499,7 @@ body {
         width: 100%;
         max-width: 300px;
     }
-
+}
 
 
 
@@ -3575,17 +3547,8 @@ body {
     }
     
     .hero-search-bar {
-        flex-direction: row !important;
-        max-width: 75vw !important;
-        min-width: 0 !important;
-        gap: 0.3rem;
-        padding: 0.3rem;
-    }
-    .hero-search-bar input,
-    .hero-search-btn {
-        border-radius: 20px !important;
-        font-size: 0.95rem !important;
-        padding: 0.7rem 1rem !important;
+        flex-direction: column;
+        gap: 0.5rem;
     }
     
     .hero-search-bar input,
