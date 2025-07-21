@@ -70,7 +70,7 @@ function initializeHeader() {
     const header = document.querySelector('.header');
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
-    
+    const navLinks = document.querySelectorAll('.nav-link');
     // Mobile menu toggle
     if (hamburger && navMenu) {
         hamburger.addEventListener('click', function() {
@@ -86,6 +86,13 @@ function initializeHeader() {
             }
         });
     }
+    // Only one nav-link active at a time
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            navLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
 }
 
 // Hero content animations
