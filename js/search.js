@@ -479,30 +479,15 @@ function initializeSearchPage() {
 function toggleSidebar() {
     const sidebar = document.getElementById('searchSidebar');
     const toggleBtn = document.getElementById('sidebarToggle');
+    
     sidebar.classList.toggle('active');
+    
     if (sidebar.classList.contains('active')) {
         toggleBtn.style.display = 'none';
-        // Add event listener to close sidebar when clicking outside
-        setTimeout(() => {
-            document.addEventListener('mousedown', closeSidebarOnOutsideClick);
-        }, 10);
     } else {
         setTimeout(() => {
             toggleBtn.style.display = 'flex';
         }, 300);
-        document.removeEventListener('mousedown', closeSidebarOnOutsideClick);
-    }
-}
-
-function closeSidebarOnOutsideClick(e) {
-    const sidebar = document.getElementById('searchSidebar');
-    const toggleBtn = document.getElementById('sidebarToggle');
-    if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
-        sidebar.classList.remove('active');
-        setTimeout(() => {
-            toggleBtn.style.display = 'flex';
-        }, 300);
-        document.removeEventListener('mousedown', closeSidebarOnOutsideClick);
     }
 }
 
