@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - FindMySpot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <div class="login-page">
+        <div class="login-background">
+            <img src="https://images.unsplash.com/photo-1590674899484-d5640e854abe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Parking" class="bg-image">
+            <div class="login-overlay"></div>
+        </div>
+        
+        <div class="login-container">
+            <div class="login-card glass-card">
+                <div class="login-header">
+                    <h2>Welcome Back</h2>
+                    <div class="logo-small">FindMySpot</div>
+                </div>
+                
+                <div class="role-toggle">
+                    <div style="display: flex; gap: 1rem; background: rgba(255,255,255,0.28); backdrop-filter: blur(26px); -webkit-backdrop-filter: blur(26px); border-radius: 50px; border: 1px solid rgba(255,255,255,0.3); padding: 8px 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.08); align-items: center; justify-content: center; width: fit-content; margin: 0 auto;">
+                        <button class="toggle-btn active" data-role="customer" style="border-radius: 50px;">Customer</button>
+                        <button class="toggle-btn" data-role="host" style="border-radius: 50px;">Host</button>
+                    </div>
+                </div>
+                
+                <form class="login-form" id="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                        <div class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                        <div class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-options">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="remember" name="remember">
+                            <span class="checkmark"></span>
+                            Remember me
+                        </label>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-full">Login</button>
+                </form>
+                
+                <div class="login-footer">
+                    <p>Don't have an account? <a href="register.html">Register here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/login.js"></script>
+</body>
+</html>

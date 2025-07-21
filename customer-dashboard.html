@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard - FindMySpot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <h2>FindMySpot</h2>
+                </div>
+                <nav class="nav-menu" id="navMenu">
+                    <ul class="nav-list">
+                        <li><a href="customer-dashboard.html" class="nav-link active">Dashboard</a></li>
+                        <li><a href="search.html" class="nav-link">Search</a></li>
+                        <li><a href="customer-bookings.html" class="nav-link">Bookings</a></li>
+                        <li><a href="customer-profile.html" class="nav-link">Profile</a></li>
+                    </ul>
+                    <div class="user-actions mobile">
+                        <div class="role-switch">
+                            <a href="host-dashboard.html" class="btn btn-ghost role-toggle" id="roleToggle">Switch to Host</a>
+                        </div>
+                        <button class="btn btn-primary" onclick="logout()">Logout</button>
+                    </div>
+                </nav>
+                <div class="user-actions desktop">
+                    <div class="role-switch">
+<a href="host-dashboard.html" class="btn btn-ghost role-toggle" id="roleToggle" style="color:#fff;">Switch to Host</a>
+                    </div>
+                    <button class="btn btn-primary" onclick="logout()">Logout</button>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard">
+        <div class="container">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="welcome-card glass-card" style="background: linear-gradient(135deg, rgba(63, 63, 63, 0.1), rgba(255, 255, 255, 0.3)); border: 2px solid rgba(63, 63, 63, 0.2);">
+                    <div class="welcome-content">
+                        <h1>Welcome back, <span id="userName">John Doe</span>!</h1>
+                        <p>Ready to find your perfect parking spot?</p>
+                        <div class="stats-summary">
+                            <div class="stat-item">
+                                <span class="stat-number" id="totalBookings">12</span>
+                                <span class="stat-label">Total Bookings</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" id="upcomingBookings">2</span>
+                                <span class="stat-label">Upcoming</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" id="savedSpots">5</span>
+                                <span class="stat-label">Saved Spots</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="welcome-actions">
+                        <a href="search.html" class="btn btn-primary">Find Parking</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Upcoming Bookings -->
+            <section class="upcoming-bookings">
+                <h2>Upcoming Bookings</h2>
+                <div class="bookings-grid">
+                    <div class="booking-card glass-card">
+                        <div class="booking-header">
+                            <h3>Downtown Parking Garage</h3>
+                            <span class="booking-status confirmed">Confirmed</span>
+                        </div>
+                        <div class="booking-details">
+                            <div class="detail-item">
+                                <span class="label">Date:</span>
+                                <span class="value">Today, Dec 15</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Time:</span>
+                                <span class="value">2:00 PM - 6:00 PM</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Location:</span>
+                                <span class="value">123 Main St, Downtown</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Vehicle:</span>
+                                <span class="value">Sedan</span>
+                            </div>
+                        </div>
+                        <div class="booking-actions">
+                            <button class="btn btn-ghost btn-sm" style="border: 1px solid #BFBFBF; color: #262626;" onclick="viewBookingDetails('PKG-2024-001')">View Details</button>
+                            <button class="btn btn-danger btn-sm" onclick="cancelBooking('PKG-2024-001')">Cancel</button>
+                        </div>
+                    </div>
+
+                    <div class="booking-card glass-card">
+                        <div class="booking-header">
+                            <h3>Airport Long-term Parking</h3>
+                            <span class="booking-status confirmed">Confirmed</span>
+                        </div>
+                        <div class="booking-details">
+                            <div class="detail-item">
+                                <span class="label">Date:</span>
+                                <span class="value">Dec 18 - Dec 22</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Time:</span>
+                                <span class="value">6:00 AM - 11:00 PM</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Location:</span>
+                                <span class="value">Airport Terminal 1</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Vehicle:</span>
+                                <span class="value">SUV</span>
+                            </div>
+                        </div>
+                        <div class="booking-actions">
+                            <button class="btn btn-ghost btn-sm" style="border: 1px solid #BFBFBF; color: #262626;" onclick="viewBookingDetails('PKG-2024-002')">View Details</button>
+                            <button class="btn btn-danger btn-sm" onclick="cancelBooking('PKG-2024-002')">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Suggested Locations -->
+            <section class="suggested-locations">
+                <h2>Suggested Locations</h2>
+                <div class="locations-grid">
+                    <div class="location-card glass-card">
+                        <div class="location-image">
+                            <img src="https://images.unsplash.com/photo-1555472492-816b516932ea?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Car in Downtown">
+                        </div>
+                        <div class="location-content">
+                            <h3>Dhaka</h3>
+                            <p>Available spots: 24</p>
+                            <p>Starting from $5/hour</p>
+                            <a href="search.html" class="btn btn-primary btn-sm">Find Parking</a>
+                        </div>
+                    </div>
+
+                    <div class="location-card glass-card">
+                        <div class="location-image">
+                            <img src="https://images.unsplash.com/photo-1740593353242-a8a5c51ca202?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Car in Downtown">
+                        </div>
+                        <div class="location-content">
+                            <h3>Chittagong</h3>
+                            <p>Available spots: 18</p>
+                            <p>Starting from $5/hour</p>
+                            <a href="search.html" class="btn btn-primary btn-sm">Find Parking</a>
+                        </div>
+                    </div>
+
+                    <div class="location-card glass-card">
+                        <div class="location-image">
+                            <img src="https://images.unsplash.com/photo-1607893467292-d32723a87a6e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Car at Shopping Mall">
+                        </div>
+                        <div class="location-content">
+                            <h3>Rajshahi</h3>
+                            <p>Available spots: 13</p>
+                            <p>Starting from $3/hour</p>
+                            <a href="search.html" class="btn btn-primary btn-sm">Find Parking</a>
+                        </div>
+                    </div>
+
+                    <div class="location-card glass-card">
+                        <div class="location-image">
+                            <img src="https://images.unsplash.com/photo-1660322530320-b55453166f31?q=80&w=1982&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Car at Airport">
+                        </div>
+                        <div class="location-content">
+                            <h3>Khulna</h3>
+                            <p>Available spots: 21</p>
+                            <p>Starting from $8/hour</p>
+                            <a href="search.html" class="btn btn-primary btn-sm">Find Parking</a>
+                        </div>
+                    </div>
+
+                    <div class="location-card glass-card">
+                        <div class="location-image">
+                            <img src="https://images.unsplash.com/photo-1750509009064-8cacc53d18a9?q=80&w=2029&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Car in Business District">
+                        </div>
+                        <div class="location-content">
+                            <h3>Bogura</h3>
+                            <p>Available spots: 11</p>
+                            <p>Starting from $6/hour</p>
+                            <a href="search.html" class="btn btn-primary btn-sm">Find Parking</a>
+                        </div>
+                    </div>
+
+                    <div class="location-card glass-card">
+                        <div class="location-image">
+                            <img src="https://images.unsplash.com/photo-1559384403-c23988dd4219?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Car in Business District">
+                        </div>
+                        <div class="location-content">
+                            <h3>Dinajpur</h3>
+                            <p>Available spots: 16</p>
+                            <p>Starting from $6/hour</p>
+                            <a href="search.html" class="btn btn-primary btn-sm">Find Parking</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Notifications -->
+            <section class="notifications">
+                <h2>Recent Notifications</h2>
+                <div class="notification-list">
+                    <div class="notification-item glass-card">
+                        <div class="notification-icon success">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22,4 12,14.01 9,11.01"></polyline>
+                            </svg>
+                        </div>
+                        <div class="notification-content">
+                            <h4>Booking Confirmed</h4>
+                            <p>Your parking spot at Downtown Garage has been confirmed for today 2:00 PM.</p>
+                            <span class="time">2 hours ago</span>
+                        </div>
+                        <button class="notification-close" onclick="closeNotification(this)" style="background: none; border: none; font-size: 1.5rem; color: #666; cursor: pointer; padding: 0.5rem;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="notification-item glass-card">
+                        <div class="notification-icon info">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                        </div>
+                        <div class="notification-content">
+                            <h4>Special Offer</h4>
+                            <p>Get 20% off on your next booking when you park for more than 4 hours!</p>
+                            <span class="time">1 day ago</span>
+                        </div>
+                        <button class="notification-close" onclick="closeNotification(this)">×</button>
+                    </div>
+
+                    <div class="notification-item glass-card">
+                        <div class="notification-icon warning">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+                                <line x1="12" y1="9" x2="12" y2="13"></line>
+                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                            </svg>
+                        </div>
+                        <div class="notification-content">
+                            <h4>Reminder</h4>
+                            <p>Your parking session at Airport Terminal 1 starts in 3 days. Don't forget!</p>
+                            <span class="time">2 days ago</span>
+                        </div>
+                        <button class="notification-close" onclick="closeNotification(this)">×</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Help Center</h4>
+                    <ul>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Safety</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li>Email: support@findmyspot.com</li>
+                        <li>Phone: +1 (555) 123-4567</li>
+                        <li>Address: 123 Parking St, City, Country</li>
+                        <li>Hours: 24/7 Support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/customer-dashboard.js"></script>
+</body>
+</html>

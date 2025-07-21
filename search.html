@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Parking - FindMySpot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/leaflet-custom.css" />
+</head>
+<body>
+   <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <h2>FindMySpot</h2>
+                </div>
+                <nav class="nav-menu" id="navMenu">
+                    <ul class="nav-list">
+                        <li><a href="customer-dashboard.html" class="nav-link">Dashboard</a></li>
+                        <li><a href="search.html" class="nav-link active">Search</a></li>
+                        <li><a href="customer-bookings.html" class="nav-link">Bookings</a></li>
+                        <li><a href="customer-profile.html" class="nav-link">Profile</a></li>
+                    </ul>
+                    <div class="user-actions mobile">
+                        <div class="role-switch">
+                            <a href="host-dashboard.html" class="btn btn-ghost role-toggle" id="roleToggle">Switch to Host</a>
+                        </div>
+                        <button class="btn btn-primary" onclick="logout()">Logout</button>
+                    </div>
+                </nav>
+                <div class="user-actions desktop">
+                    <div class="role-switch">
+<a href="host-dashboard.html" class="btn btn-ghost role-toggle" id="roleToggle" style="color:#fff;">Switch to Host</a>
+                    </div>
+                    <button class="btn btn-primary" onclick="logout()">Logout</button>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="search-page">
+        <!-- Hero Search Section -->
+        <section class="search-hero">
+            <div class="container">
+                <h1>Find Your Perfect Parking Spot</h1>
+                <p>Discover convenient parking solutions in Bangladesh</p>
+                <div class="hero-search-bar">
+                    <input type="text" id="heroLocationSearch" placeholder="Enter city or area..." value="Dhaka">
+                    <button class="hero-search-btn" onclick="searchParkingSpots()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        Search
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Layout -->
+        <div class="search-layout">
+            <!-- Sidebar Toggle Button -->
+            <button class="sidebar-toggle" onclick="toggleSidebar()" id="sidebarToggle">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+
+            <!-- Filters Sidebar -->
+            <div class="search-sidebar" id="searchSidebar">
+                
+                
+                <div class="filter-group">
+                    <label>Date</label>
+                    <input type="date" id="dateFilter" value="2024-12-15">
+                </div>
+
+                <div class="filter-group">
+                    <label>Start Time</label>
+                    <select id="startTime">
+                        <option value="00:00">12:00 AM</option>
+                        <option value="01:00">1:00 AM</option>
+                        <option value="02:00">2:00 AM</option>
+                        <option value="03:00">3:00 AM</option>
+                        <option value="04:00">4:00 AM</option>
+                        <option value="05:00">5:00 AM</option>
+                        <option value="06:00">6:00 AM</option>
+                        <option value="07:00">7:00 AM</option>
+                        <option value="08:00">8:00 AM</option>
+                        <option value="09:00">9:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="12:00">12:00 PM</option>
+                        <option value="13:00">1:00 PM</option>
+                        <option value="14:00" selected>2:00 PM</option>
+                        <option value="15:00">3:00 PM</option>
+                        <option value="16:00">4:00 PM</option>
+                        <option value="17:00">5:00 PM</option>
+                        <option value="18:00">6:00 PM</option>
+                        <option value="19:00">7:00 PM</option>
+                        <option value="20:00">8:00 PM</option>
+                        <option value="21:00">9:00 PM</option>
+                        <option value="22:00">10:00 PM</option>
+                        <option value="23:00">11:00 PM</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>End Time</label>
+                    <select id="endTime">
+                        <option value="01:00">1:00 AM</option>
+                        <option value="02:00">2:00 AM</option>
+                        <option value="03:00">3:00 AM</option>
+                        <option value="04:00">4:00 AM</option>
+                        <option value="05:00">5:00 AM</option>
+                        <option value="06:00">6:00 AM</option>
+                        <option value="07:00">7:00 AM</option>
+                        <option value="08:00">8:00 AM</option>
+                        <option value="09:00">9:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="12:00">12:00 PM</option>
+                        <option value="13:00">1:00 PM</option>
+                        <option value="14:00">2:00 PM</option>
+                        <option value="15:00">3:00 PM</option>
+                        <option value="16:00">4:00 PM</option>
+                        <option value="17:00">5:00 PM</option>
+                        <option value="18:00" selected>6:00 PM</option>
+                        <option value="19:00">7:00 PM</option>
+                        <option value="20:00">8:00 PM</option>
+                        <option value="21:00">9:00 PM</option>
+                        <option value="22:00">10:00 PM</option>
+                        <option value="23:00">11:00 PM</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Vehicle Type</label>
+                    <select id="vehicleType">
+                        <option value="all">All Types</option>
+                        <option value="sedan">Sedan</option>
+                        <option value="suv">SUV</option>
+                        <option value="hatchback">Hatchback</option>
+                        <option value="minivan">Minivan</option>
+                        <option value="truck">Truck</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Sort By</label>
+                    <select id="sortBy">
+                        <option value="distance">Distance</option>
+                        <option value="price-low">Price (Low to High)</option>
+                        <option value="price-high">Price (High to Low)</option>
+                        <option value="rating">Rating</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Price Range</label>
+                    <div class="price-slider">
+                        <input type="range" id="priceRange" min="0" max="500" value="250" oninput="updatePriceRange()">
+                        <div class="price-display">৳0 - ৳<span id="priceValue">250</span>/hr</div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label>Amenities</label>
+                    <div class="amenities-filter">
+                        <label class="checkbox-container">
+                            <input type="checkbox" name="amenities" value="covered">
+                            Covered
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox" name="amenities" value="security">
+                            Security
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox" name="amenities" value="ev">
+                            EV Charger
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox" name="amenities" value="handicap">
+                            Handicap Access
+                        </label>
+                    </div>
+                </div>
+
+                <div class="filter-actions">
+                    <button class="btn btn-outline" onclick="resetFilters()">Reset Filters</button>
+                    <button class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="search-main">
+                <!-- Map Container -->
+                <div class="search-map-container">
+                    <div id="map" class="map"></div>
+                </div>
+
+                <!-- Results Section -->
+                <div class="search-results">
+                    <div class="results-header">
+                        <h3>Available Spots</h3>
+                        <span class="results-count" id="resultsCount">30 spots found</span>
+                    </div>
+                    
+                    <div class="spots-list" id="spotsList">
+                        <!-- Parking spot cards will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/search.js"></script>
+</body>
+</html>
