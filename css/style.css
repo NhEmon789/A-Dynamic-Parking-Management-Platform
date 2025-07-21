@@ -335,6 +335,8 @@ body {
     opacity: 0;
     transform: translateY(50px);
     animation: fadeInUp 1s ease-out 0.5s forwards;
+    text-shadow: 0 6px 10px rgba(0,0,0,100);
+
 }
 
 .hero-subtitle {
@@ -344,6 +346,8 @@ body {
     opacity: 0;
     transform: translateY(30px);
     animation: fadeInUp 0.8s ease-out 1s forwards;
+    text-shadow: 0 6px 10px rgba(0,0,0,100);
+
 }
 
 .hero-buttons {
