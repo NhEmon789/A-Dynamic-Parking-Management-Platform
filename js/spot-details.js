@@ -28,6 +28,22 @@ function initializeCarousel() {
     });
 }
 
+function calculateDuration(startTime, endTime) {
+    // Parse the hours from HH:MM format
+    const startHour = parseInt(startTime.split(':')[0]);
+    const endHour = parseInt(endTime.split(':')[0]);
+    
+    // Calculate duration
+    let duration = endHour - startHour;
+    
+    // Handle overnight parking
+    if (duration <= 0) {
+        duration = 24 + duration;
+    }
+    
+    return duration;
+}
+
 function initializeBookingForm() {
     const bookingForm = document.getElementById('bookingForm');
     if (bookingForm) {
@@ -41,6 +57,12 @@ function initializeBookingForm() {
     if (startTime && endTime) {
         startTime.addEventListener('change', updateCostCalculation);
         endTime.addEventListener('change', updateCostCalculation);
+    }
+    
+    // Initialize payment modal button
+    const proceedPaymentBtn = document.getElementById('proceedPayment');
+    if (proceedPaymentBtn) {
+        proceedPaymentBtn.addEventListener('click', proceedWithPayment);
     }
 }
 
@@ -176,44 +198,116 @@ function updateCarousel() {
 function updateCostCalculation() {
     const startTime = document.getElementById('startTime').value;
     const endTime = document.getElementById('endTime').value;
-    const hourlyRate = spotData ? spotData.price : 8.00;
+    const hourlyRate = 50; // Changed to match the modal rate
     
     if (startTime && endTime) {
-        const start = new Date(`2000-01-01T${startTime}`);
-        const end = new Date(`2000-01-01T${endTime}`);
-        
-        let duration = (end - start) / (1000 * 60 * 60); // Convert to hours
-        
-        // Handle overnight parking
-        if (duration <= 0) {
-            duration = 24 + duration;
-        }
-        
+        const duration = calculateDuration(startTime, endTime);
         const subtotal = duration * hourlyRate;
-        const serviceFee = 2.00;
+        const serviceFee = 20; // Changed to match the modal service fee
         const total = subtotal + serviceFee;
         
-        // Update display
+        // Update booking form display
         document.getElementById('duration').textContent = `${duration} hours`;
-        document.getElementById('totalCost').textContent = `$${total.toFixed(2)}`;
+        document.getElementById('totalCost').textContent = `৳${total.toFixed(2)}`;
     }
+}
+
+// Payment Modal Functions
+let selectedPaymentMethod = null;
+
+function openPaymentModal(bookingDetails) {
+    const modal = document.getElementById('paymentModal');
+    const modalDuration = document.getElementById('modalDuration');
+    const modalRate = document.getElementById('modalRate');
+    const modalServiceFee = document.getElementById('modalServiceFee');
+    const modalTotal = document.getElementById('modalTotal');
+
+    // Update modal with booking details
+    modalDuration.textContent = `${bookingDetails.duration} hours`;
+    modalRate.textContent = `৳${bookingDetails.ratePerHour}/hour`;
+    modalServiceFee.textContent = `৳${bookingDetails.serviceFee}`;
+    modalTotal.textContent = `৳${bookingDetails.total}`;
+
+    // Show modal with animation
+    modal.style.display = 'flex';
+    setTimeout(() => {
+        modal.querySelector('.payment-modal').classList.add('active');
+    }, 10);
+
+    // Reset payment method selection
+    selectedPaymentMethod = null;
+    document.querySelectorAll('.payment-option').forEach(option => {
+        option.classList.remove('selected');
+    });
+    document.getElementById('proceedPayment').disabled = true;
+}
+
+function closePaymentModal() {
+    const modal = document.getElementById('paymentModal');
+    modal.querySelector('.payment-modal').classList.remove('active');
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
+}
+
+function selectPaymentMethod(method) {
+    selectedPaymentMethod = method;
+    
+    // Update UI
+    document.querySelectorAll('.payment-option').forEach(option => {
+        option.classList.remove('selected');
+    });
+    event.currentTarget.classList.add('selected');
+    
+    // Enable proceed button
+    document.getElementById('proceedPayment').disabled = false;
+}
+
+function proceedWithPayment() {
+    if (!selectedPaymentMethod) return;
+    
+    // Here you would integrate with your payment gateway
+    // For now, we'll just show a success message
+    alert(`Processing payment with ${selectedPaymentMethod}...`);
+    // After successful payment:
+    // 1. Update booking status
+    // 2. Close modal
+    // 3. Redirect to bookings page or show confirmation
+    closePaymentModal();
+    window.location.href = 'customer-bookings.html';
 }
 
 function handleBookingSubmit(e) {
     e.preventDefault();
     
-    const formData = new FormData(e.target);
-    const bookingData = {
-        spotId: spotData.id,
-        date: formData.get('date'),
-        startTime: formData.get('startTime'),
-        endTime: formData.get('endTime'),
-        vehicleType: formData.get('vehicleType'),
-        total: document.getElementById('totalCost').textContent
-    };
+    // Get form values
+    const startTime = document.getElementById('startTime').value;
+    const endTime = document.getElementById('endTime').value;
+    const date = document.getElementById('bookingDate').value;
+    const vehicleType = document.getElementById('vehicleType').value;
     
-    // Show booking modal
-    showBookingModal(bookingData);
+    // Validate form
+    if (!startTime || !endTime || !date || !vehicleType) {
+        alert('Please fill in all booking details');
+        return;
+    }
+    
+    // Calculate booking details
+    const duration = calculateDuration(startTime, endTime);
+    const ratePerHour = 50; // Rate in Taka
+    const serviceFee = 20; // Service fee in Taka
+    const total = (duration * ratePerHour) + serviceFee;
+
+    // Open payment modal with booking details
+    openPaymentModal({
+        duration,
+        ratePerHour,
+        serviceFee,
+        total,
+        vehicleType
+    });
+    
+    return false; // Prevent form submission
 }
 
 function showBookingModal(bookingData) {
