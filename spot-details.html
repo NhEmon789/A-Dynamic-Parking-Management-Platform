@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/payment-modal.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
@@ -287,8 +288,53 @@
         </div>
     </main>
 
+    <!-- Payment Modal -->
+    <div class="payment-modal-overlay" id="paymentModal">
+        <div class="payment-modal">
+            <div class="payment-modal-header">
+                <h2>Choose Payment Method</h2>
+                <button class="close-modal" onclick="closePaymentModal()">&times;</button>
+            </div>
+            <div class="payment-options">
+                <div class="payment-option" onclick="selectPaymentMethod('bkash')">
+                    <img src="https://download.logo.wine/logo/BKash/BKash-Logo.wine.png" alt="bKash">
+                    <h3>bKash</h3>
+                </div>
+                <div class="payment-option" onclick="selectPaymentMethod('nagad')">
+                    <img src="https://download.logo.wine/logo/Nagad/Nagad-Logo.wine.png" alt="Nagad">
+                    <h3>Nagad</h3>
+                </div>
+                <div class="payment-option" onclick="selectPaymentMethod('rocket')">
+                    <img src="https://download.logo.wine/logo/Dutch_Bangla_Bank/Dutch_Bangla_Bank-Logo.wine.png" alt="Rocket">
+                    <h3>Rocket</h3>
+                </div>
+            </div>
+            <div class="payment-details">
+                <div class="payment-details-row">
+                    <span>Booking Duration</span>
+                    <span id="modalDuration">2 hours</span>
+                </div>
+                <div class="payment-details-row">
+                    <span>Rate</span>
+                    <span id="modalRate">৳50/hour</span>
+                </div>
+                <div class="payment-details-row">
+                    <span>Service Fee</span>
+                    <span id="modalServiceFee">৳20</span>
+                </div>
+                <div class="payment-details-row">
+                    <span>Total Amount</span>
+                    <span id="modalTotal">৳120</span>
+                </div>
+            </div>
+            <button class="proceed-payment" id="proceedPayment" disabled>
+                Proceed to Payment
+            </button>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/spot-details.js"></script>
     <script>
         let currentSlide = 0;
         const totalSlides = 5;
