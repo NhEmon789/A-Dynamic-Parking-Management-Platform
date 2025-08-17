@@ -1,0 +1,72 @@
+CREATE TABLE users (
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    phone VARCHAR(20),
+    password_hash TEXT,
+    role ENUM('customer', 'host', 'admin') NOT NULL DEFAULT 'customer',
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    vehicle_type VARCHAR(50),
+    license_plate VARCHAR(20)
+);
+
+
+CREATE TABLE parking_spots (
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT(11) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    address VARCHAR(255),
+    latitude DECIMAL(10,8),
+    longitude DECIMAL(11,8),
+    hourly_rate DECIMAL(10,2),
+    currency VARCHAR(10),
+    photo_path VARCHAR(255),
+    vehicle_types SET('Sedan', 'Suv', 'Hatchback', 'Minivan', 'Truck'),
+    amenities TEXT,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    spot_status ENUM('active', 'inactive') NOT NULL DEFAULT 'active',
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+
+);
+
+CREATE TABLE spot_availability (
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    spot_id INT(11) NOT NULL,
+    day_of_week ENUM('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday') NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    FOREIGN KEY (spot_id) REFERENCES parking_spots(id) ON DELETE CASCADE
+);
+
+CREATE TABLE bookings (
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    spot_id INT(11) NOT NULL,
+    customer_id INT(11) NOT NULL,
+    booking_date DATE NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    total_cost DECIMAL(10,2),
+    payment_status ENUM('pending', 'paid', 'failed', 'cancelled') DEFAULT 'pending',
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('active', 'cancelled') DEFAULT 'active',
+    INDEX (spot_id),
+    INDEX (customer_id),
+    FOREIGN KEY (spot_id) REFERENCES parking_spots(id) ON DELETE CASCADE,
+    FOREIGN KEY (customer_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE payments (
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    booking_id INT(11) NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    transaction_id VARCHAR(100),
+    payment_method VARCHAR(50),
+    payment_status ENUM('success', 'failed', 'pending') DEFAULT 'pending',
+    paid_at TIMESTAMP NULL DEFAULT NULL,
+    INDEX (booking_id),
+    FOREIGN KEY (booking_id) REFERENCES bookings(id) ON DELETE CASCADE
+);
+
+
+

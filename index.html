@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindMySpot - Find Your Perfect Parking Spot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/register-animated-btn.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        .featured-card-link {
+            text-decoration: none;
+            /* Remove underline */
+            color: inherit;
+            /* Keep the text color as is */
+            display: block;
+            /* Make the anchor cover the whole card */
+        }
+
+        .register-animated-btn-link {
+            text-decoration: none;
+
+        }
+
+        .featured-card-link:hover {
+            /* Optional hover effect */
+            opacity: 0.9;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <h2>FindMySpot</h2>
+                </div>
+                <nav class="nav-menu" id="navMenu">
+                    <ul class="nav-list">
+                        <li><a href="#home" class="nav-link active">Home</a></li>
+                        <li><a href="#about" class="nav-link">About</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                    <div class="auth-buttons mobile">
+                        <a style="color:#ffffff; border: 1.5px solid #cccccc;" href="login.php"
+                            class="btn btn-ghost">Login</a>
+                        <a href="register.php" class="register-animated-btn-link"><button class="button">
+                                <div class="dots_border"></div>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="sparkle">
+                                    <path class="path" stroke-linejoin="round" stroke-linecap="round" stroke="black"
+                                        fill="black"
+                                        d="M14.187 8.096L15 5.25L15.813 8.096C16.0231 8.83114 16.4171 9.50062 16.9577 10.0413C17.4984 10.5819 18.1679 10.9759 18.903 11.186L21.75 12L18.904 12.813C18.1689 13.0231 17.4994 13.4171 16.9587 13.9577C16.4181 14.4984 16.0241 15.1679 15.814 15.903L15 18.75L14.187 15.904C13.9769 15.1689 13.5829 14.4994 13.0423 13.9587C12.5016 13.4181 11.8321 13.0241 11.097 12.814L8.25 12L11.096 11.187C11.8311 10.9769 12.5006 10.5829 13.0413 10.0423C13.5819 9.50162 13.9759 8.83214 14.186 8.097L14.187 8.096Z">
+                                    </path>
+                                    <path class="path" stroke-linejoin="round" stroke-linecap="round" stroke="black"
+                                        fill="black"
+                                        d="M6 14.25L5.741 15.285C5.59267 15.8785 5.28579 16.4206 4.85319 16.8532C4.42059 17.2858 3.87853 17.5927 3.285 17.741L2.25 18L3.285 18.259C3.87853 18.4073 4.42059 18.7142 4.85319 19.1468C5.28579 19.5794 5.59267 20.1215 5.741 20.715L6 21.75L6.259 20.715C6.40725 20.1216 6.71398 19.5796 7.14639 19.147C7.5788 18.7144 8.12065 18.4075 8.714 18.259L9.75 18L8.714 17.741C8.12065 17.5925 7.5788 17.2856 7.14639 16.853C6.71398 16.4204 6.40725 15.8784 6.259 15.285L6 14.25Z">
+                                    </path>
+                                    <path class="path" stroke-linejoin="round" stroke-linecap="round" stroke="black"
+                                        fill="black"
+                                        d="M6.5 4L6.303 4.5915C6.24777 4.75718 6.15472 4.90774 6.03123 5.03123C5.90774 5.15472 5.75718 5.24777 5.5915 5.303L5 5.5L5.5915 5.697C5.75718 5.75223 5.90774 5.84528 6.03123 5.96877C6.15472 6.09226 6.24777 6.24282 6.303 6.4085L6.5 7L6.697 6.4085C6.75223 6.24282 6.84528 6.09226 6.96877 5.96877C7.09226 5.84528 7.24282 5.75223 7.4085 5.697L8 5.5L7.4085 5.303C7.24282 5.24777 7.09226 5.15472 6.96877 5.03123C6.84528 4.90774 6.75223 4.75718 6.697 4.5915L6.5 4Z">
+                                    </path>
+                                </svg>
+                                <span class="text_button">Register</span>
+                            </button></a>
+                    </div>
+                </nav>
+                <div class="auth-buttons desktop">
+                    <a style="color:#ffffff; border: 2px solid #cccccc;" href="login.php"
+                        class="btn btn-ghost">Login</a>
+                    <a href="register.php" class="register-animated-btn-link"><button class="button">
+                            <div class="dots_border"></div>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="sparkle">
+                                <path class="path" stroke-linejoin="round" stroke-linecap="round" stroke="black"
+                                    fill="black"
+                                    d="M14.187 8.096L15 5.25L15.813 8.096C16.0231 8.83114 16.4171 9.50062 16.9577 10.0413C17.4984 10.5819 18.1679 10.9759 18.903 11.186L21.75 12L18.904 12.813C18.1689 13.0231 17.4994 13.4171 16.9587 13.9577C16.4181 14.4984 16.0241 15.1679 15.814 15.903L15 18.75L14.187 15.904C13.9769 15.1689 13.5829 14.4994 13.0423 13.9587C12.5016 13.4181 11.8321 13.0241 11.097 12.814L8.25 12L11.096 11.187C11.8311 10.9769 12.5006 10.5829 13.0413 10.0423C13.5819 9.50162 13.9759 8.83214 14.186 8.097L14.187 8.096Z">
+                                </path>
+                                <path class="path" stroke-linejoin="round" stroke-linecap="round" stroke="black"
+                                    fill="black"
+                                    d="M6 14.25L5.741 15.285C5.59267 15.8785 5.28579 16.4206 4.85319 16.8532C4.42059 17.2858 3.87853 17.5927 3.285 17.741L2.25 18L3.285 18.259C3.87853 18.4073 4.42059 18.7142 4.85319 19.1468C5.28579 19.5794 5.59267 20.1215 5.741 20.715L6 21.75L6.259 20.715C6.40725 20.1216 6.71398 19.5796 7.14639 19.147C7.5788 18.7144 8.12065 18.4075 8.714 18.259L9.75 18L8.714 17.741C8.12065 17.5925 7.5788 17.2856 7.14639 16.853C6.71398 16.4204 6.40725 15.8784 6.259 15.285L6 14.25Z">
+                                </path>
+                                <path class="path" stroke-linejoin="round" stroke-linecap="round" stroke="black"
+                                    fill="black"
+                                    d="M6.5 4L6.303 4.5915C6.24777 4.75718 6.15472 4.90774 6.03123 5.03123C5.90774 5.15472 5.75718 5.24777 5.5915 5.303L5 5.5L5.5915 5.697C5.75718 5.75223 5.90774 5.84528 6.03123 5.96877C6.15472 6.09226 6.24777 6.24282 6.303 6.4085L6.5 7L6.697 6.4085C6.75223 6.24282 6.84528 6.09226 6.96877 5.96877C7.09226 5.84528 7.24282 5.75223 7.4085 5.697L8 5.5L7.4085 5.303C7.24282 5.24777 7.09226 5.15472 6.96877 5.03123C6.84528 4.90774 6.75223 4.75718 6.697 4.5915L6.5 4Z">
+                                </path>
+                            </svg>
+                            <span class="text_button">Register</span>
+                        </button></a>
+                </div>
+                <div class="hamburger" id="hamburger" style="border-radius: 8px; padding: 4px;">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Parking" class="hero-image">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">FIND YOUR PERFECT PARKING SPOT</h1>
+                <p class="hero-subtitle">Discover convenient parking solutions or monetize your empty space</p>
+                <div class="hero-buttons">
+                    <a href="index-search.php" class="btn btn-primary btn-glow">Find Parking</a>
+                    <a href="index-search.php" class="btn btn-ghost btn-glow">List Your Spot</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Featured Parking Spots Section -->
+    <section class="featured-spots">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Featured Parking Spots</h2>
+            <p class="section-subtitle animate-on-scroll">Discover some of our most popular parking locations</p>
+            <div class="featured-grid animate-on-scroll">
+
+                <a href="index-search.php" class="featured-card-link">
+                    <div class="featured-card glass-card animate-on-scroll">
+                        <div class="featured-image">
+                            <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                alt="Downtown Garage">
+                        </div>
+                        <div class="featured-content">
+                            <h3>Downtown Garage</h3>
+                            <div class="featured-price">৳120/hour</div>
+                            <div class="featured-location">Gulshan, Dhaka</div>
+                            <div class="featured-amenities">
+                                <span class="amenity-tag">Covered</span>
+                                <span class="amenity-tag">Security</span>
+                                <span class="amenity-tag">EV Charging</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="index-search.php" class="featured-card-link">
+                    <div class="featured-card glass-card animate-on-scroll">
+                        <div class="featured-image">
+                            <img src="https://images.unsplash.com/photo-1706651232630-1de9707a54ce?q=80&w=1966&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                alt="Airport Parking">
+                        </div>
+                        <div class="featured-content">
+                            <h3>Airport Long-term Parking</h3>
+                            <div class="featured-price">৳80/hour</div>
+                            <div class="featured-location">Hazrat Shahjalal Airport, Dhaka</div>
+                            <div class="featured-amenities">
+                                <span class="amenity-tag">24/7 Access</span>
+                                <span class="amenity-tag">Shuttle Service</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="index-search.php" class="featured-card-link">
+                    <div class="featured-card glass-card animate-on-scroll">
+                        <div class="featured-image">
+                            <img src="https://images.unsplash.com/photo-1648312289311-04df1d3d8ca6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                alt="Mall Parking">
+                        </div>
+                        <div class="featured-content">
+                            <h3>Shopping Mall Complex</h3>
+                            <div class="featured-price">৳50/hour</div>
+                            <div class="featured-location">Bashundhara City, Dhaka</div>
+                            <div class="featured-amenities">
+                                <span class="amenity-tag">Covered</span>
+                                <span class="amenity-tag">Handicap Access</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Why FindMySpot Section -->
+    <section class="why-findmyspot" id="about">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Why Choose FindMySpot</h2>
+            <p class="section-subtitle animate-on-scroll">The smart way to park and earn in Bangladesh</p>
+            <div class="why-content animate-on-scroll">
+                <div class="why-visual animate-on-scroll">
+                    <div class="visual-card glass-card smart-location-card animate-on-scroll">
+                        <div class="smart-location-content">
+                            <div class="visual-icon">
+                                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                            </div>
+                            <div class="smart-location-texts">
+                                <h3>Smart Location Finder</h3>
+                                <p>Find parking spots in Dhaka, Chittagong, Sylhet and other major cities</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="why-benefits">
+                    <div class="benefit-row">
+                        <div class="benefit-card customer-benefit glass-card animate-on-scroll">
+                            <div class="benefit-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="m22 21-3-3m0 0a5 5 0 1 0-7-7 5 5 0 0 0 7 7z"></path>
+                                </svg>
+                            </div>
+                            <h4>For Customers</h4>
+                            <ul>
+                                <li>Instant booking with real-time availability</li>
+                                <li>Interactive map view for easy navigation</li>
+                                <li>Transparent pricing in Bangladeshi Taka</li>
+                                <li>Cancel or modify bookings anytime</li>
+                            </ul>
+                        </div>
+
+                        <div class="benefit-card host-benefit glass-card animate-on-scroll">
+                            <div class="benefit-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M12 2L2 7v10c0 5.55 3.84 10 9 11 5.16-1 9-5.45 9-11V7l-10-5z"></path>
+                                    <path d="M8 11l2 2 4-4"></path>
+                                </svg>
+                            </div>
+                            <h4>For Hosts</h4>
+                            <ul>
+                                <li>Generate passive income from unused space</li>
+                                <li>Complete control over pricing and availability</li>
+                                <li>Flexible scheduling to suit your lifestyle</li>
+                                <li>Secure platform with verified users</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <style>
+        .toggle-btn {
+            color: #3f3f3f;
+            background-color: #ffffff;
+        }
+
+        .toggle-btn.active {
+            color: #ffffff;
+            background-color: #3f3f3f;
+        }
+    </style>
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">How It Works</h2>
+            <p class="section-subtitle animate-on-scroll">Simple steps to find parking or earn money from your unused
+                space</p>
+            <div class="toggle-container animate-on-scroll">
+                <div class="toggle-pill glass-pill">
+                    <button class="toggle-btn active" data-role="customer"
+                        style=" border: 1.5px solid #cccccc;">Customer</button>
+                    <button class="toggle-btn" data-role="host" style=" border: 1.5px solid #cccccc;">Host</button>
+                </div>
+            </div>
+        </div>
+        <div class="workflow-content">
+            <div class="workflow customer-workflow active">
+                <div class="workflow-steps">
+                    <div class="step reveal animate-on-scroll">
+                        <div class="step-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                        </div>
+                        <h4>Search</h4>
+                        <p>Find parking spots near your destination</p>
+                    </div>
+                    <div class="step reveal animate-on-scroll">
+                        <div class="step-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M3 6h18l-2 13H5L3 6z"></path>
+                                <path d="M8 10V6a4 4 0 0 1 8 0v4"></path>
+                            </svg>
+                        </div>
+                        <h4>Filter</h4>
+                        <p>Filter by price, amenities, and vehicle type</p>
+                    </div>
+                    <div class="step reveal animate-on-scroll">
+                        <div class="step-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                        </div>
+                        <h4>Book</h4>
+                        <p>Reserve your spot instantly with secure payment</p>
+                    </div>
+                    <div class="step reveal animate-on-scroll">
+                        <div class="step-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M7 17l-4-4 4-4M17 7l4 4-4 4"></path>
+                            </svg>
+                        </div>
+                        <h4>Park</h4>
+                        <p>Navigate to your spot and park with confidence</p>
+                    </div>
+                </div>
+            </div>
+            <div class="workflow host-workflow">
+                <div class="workflow-steps">
+                    <div class="step reveal animate-on-scroll">
+                        <div class="step-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <h4>Register</h4>
+                        <p>Create your host account and verify identity</p>
+                    </div>
+                    <div class="step reveal animate-on-scroll">
+                        <div class="step-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </div>
+                        <h4>Add Spot</h4>
+                        <p>List your parking space with photos and details</p>
+                    </div>
+                    <div class="step reveal animate-on-scroll">
+                        <div class="step-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4>Get Booked</h4>
+                        <p>Receive bookings and manage availability</p>
+                    </div>
+                    <div class="step reveal animate-on-scroll">
+                        <div class="step-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </div>
+                        <h4>Earn</h4>
+                        <p>Get paid automatically for each booking</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <!-- About Section -->
+    <section class="about-section" id="about-team">
+        <div class="container about-container">
+            <h2 class="about-title">About Our Team</h2>
+            <p class="about-description">
+                We are a passionate team dedicated to making parking smarter, easier, and more accessible for everyone.
+                Meet the minds behind FindMySpot!
+            </p>
+            <div class="about-team-cards">
+                <div class="about-panel">
+                    <div class="about-ring">
+                        <div class="about-card about-card1"></div>
+                        <div class="about-border">
+                            <p class="about-name">Azim</p>
+                            <div class="about-slide">
+                                <h6 class="about-role">Frontend Developer</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-panel">
+                    <div class="about-ring">
+                        <div class="about-card about-card2"></div>
+                        <div class="about-border">
+                            <p class="about-name">Emon</p>
+                            <div class="about-slide">
+                                <h6 class="about-role">Backend Developer</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-panel">
+                    <div class="about-ring">
+                        <div class="about-card about-card3"></div>
+                        <div class="about-border">
+                            <p class="about-name">Auntu</p>
+                            <div class="about-slide">
+                                <h6 class="about-role">UI/UX Designer</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-panel">
+                    <div class="about-ring">
+                        <div class="about-card about-card4"></div>
+                        <div class="about-border">
+                            <p class="about-name">Sifat</p>
+                            <div class="about-slide">
+                                <h6 class="about-role">QA Engineer</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-panel">
+                    <div class="about-ring">
+                        <div class="about-card about-card5"></div>
+                        <div class="about-border">
+                            <p class="about-name">Arman</p>
+                            <div class="about-slide">
+                                <h6 class="about-role">Project Manager</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">What Our Users Say</h2>
+            <p class="section-subtitle animate-on-scroll">Real experiences from our community of drivers and parking
+                space owners</p>
+            <div class="testimonials-container animate-on-scroll">
+                <div class="testimonial-row animate-on-scroll">
+                    <div class="testimonial-card glass-card animate-on-scroll">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"Amazing service! Found parking in downtown within minutes. The app is so intuitive and the
+                            spots are always available as shown."</p>
+                        <div class="user-info">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
+                                alt="User">
+                            <div>
+                                <h4>John Smith</h4>
+                                <span>Customer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card glass-card animate-on-scroll">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"As a host, I've been earning consistent income from my unused driveway. The platform is
+                            reliable and payments are always on time."</p>
+                        <div class="user-info">
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616b9461e25?w=100&h=100&fit=crop&crop=face"
+                                alt="User">
+                            <div>
+                                <h4>Sarah Johnson</h4>
+                                <span>Host</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card glass-card animate-on-scroll">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"Best parking app I've used! The map view is incredibly helpful and the booking process is
+                            seamless. Highly recommend!"</p>
+                        <div class="user-info">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
+                                alt="User">
+                            <div>
+                                <h4>Mike Chen</h4>
+                                <span>Customer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card glass-card animate-on-scroll">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"The security features give me peace of mind. All users are verified and the payment system
+                            is completely secure."</p>
+                        <div class="user-info">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
+                                alt="User">
+                            <div>
+                                <h4>Emma Davis</h4>
+                                <span>Host</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card glass-card animate-on-scroll">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"Fantastic customer service! Had an issue with my booking and they resolved it within
+                            minutes. Professional and friendly."</p>
+                        <div class="user-info">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face"
+                                alt="User">
+                            <div>
+                                <h4>Alex Brown</h4>
+                                <span>Customer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card glass-card animate-on-scroll">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"I've been hosting for 6 months now and it's been a great experience. Easy to manage and
+                            great additional income stream."</p>
+                        <div class="user-info">
+                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop&crop=face"
+                                alt="User">
+                            <div>
+                                <h4>Lisa Wilson</h4>
+                                <span>Host</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card glass-card animate-on-scroll">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"The pricing is fair and transparent. No hidden fees, just straightforward parking solutions.
+                            Love the simplicity!"</p>
+                        <div class="user-info">
+                            <img src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=100&h=100&fit=crop&crop=face"
+                                alt="User">
+                            <div>
+                                <h4>David Lee</h4>
+                                <span>Customer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card glass-card animate-on-scroll">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"Perfect for busy areas! I can always find a spot even in the most crowded locations. Game
+                            changer for city driving."</p>
+                        <div class="user-info">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face"
+                                alt="User">
+                            <div>
+                                <h4>Rachel Green</h4>
+                                <span>Customer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card glass-card animate-on-scroll">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"The host dashboard is incredibly user-friendly. I can track my earnings, manage bookings,
+                            and communicate with customers easily."</p>
+                        <div class="user-info">
+                            <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&h=100&fit=crop&crop=face"
+                                alt="User">
+                            <div>
+                                <h4>Tom Anderson</h4>
+                                <span>Host</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card glass-card">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"Mobile app works flawlessly! Can book, modify, and cancel reservations on the go. Perfect
+                            for my busy lifestyle."</p>
+                        <div class="user-info">
+                            <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=100&h=100&fit=crop&crop=face"
+                                alt="User">
+                            <div>
+                                <h4>Jessica Taylor</h4>
+                                <span>Customer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Frequently Asked Questions</h2>
+            <p class="section-subtitle animate-on-scroll">Find answers to common questions about FindMySpot</p>
+            <div class="faq-container animate-on-scroll">
+                <div class="faq-item animate-on-scroll">
+                    <button class="faq-question">
+                        How do I book a parking spot?
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Simply search for parking spots in your desired location, select your preferred spot, choose
+                            your time slot, and complete the booking with secure payment. You'll receive instant
+                            confirmation.</p>
+                    </div>
+                </div>
+                <div class="faq-item animate-on-scroll">
+                    <button class="faq-question">
+                        Can I cancel my booking?
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, you can cancel your booking up to 2 hours before your scheduled time. Cancellations made
+                            within this timeframe will receive a full refund processed within 3-5 business days.</p>
+                    </div>
+                </div>
+                <div class="faq-item animate-on-scroll">
+                    <button class="faq-question">
+                        How do I list my parking space?
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Register as a host, add your parking spot details including photos and location, set your
+                            pricing and availability, and start earning. Our team will verify your listing within 24
+                            hours.</p>
+                    </div>
+                </div>
+                <div class="faq-item animate-on-scroll">
+                    <button class="faq-question">
+                        Is my payment information secure?
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Absolutely. We use industry-standard encryption and secure payment processing. Your payment
+                            information is never stored on our servers and all transactions are protected by advanced
+                            security measures.</p>
+                    </div>
+                </div>
+                <div class="faq-item animate-on-scroll">
+                    <button class="faq-question">
+                        What if I have issues with a parking spot?
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Our 24/7 customer support team is here to help. Contact us immediately if you encounter any
+                            issues, and we'll work to resolve the problem quickly and fairly for all parties involved.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="register.php">Find Parking</a></li>
+                        <li><a href="register.php">List Your Spot</a></li>
+                        <li><a href="login.php">Login</a></li>
+                        <li><a href="#">Mobile App</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Help Center</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Safety</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li>Email: support@findmyspot.com</li>
+                        <li>Phone: +880 1234-567890</li>
+                        <li>Address: 123 Gulshan Ave, Dhaka, Bangladesh</li>
+                        <li>Hours: 24/7 Support</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FindMySpot. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

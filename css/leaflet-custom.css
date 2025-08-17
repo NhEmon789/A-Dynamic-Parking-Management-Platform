@@ -1,0 +1,54 @@
+/* Hide Leaflet zoom controls when header overlaps them */
+.header-overlap .leaflet-control-zoom {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+/* Custom styles for Leaflet zoom controls */
+.leaflet-control-zoom {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.92) !important;
+  border: 1.5px solid #E7E7E7 !important;
+  z-index: 1 !important; /* Lower than header and most overlays */
+  position: absolute !important;
+  top: 10px;
+  left: 10px;
+}
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  background: none !important;
+  color: #222 !important;
+  font-size: 2rem !important;
+  font-weight: 600;
+  border: none !important;
+  width: 48px;
+  height: 48px;
+  transition: background 0.2s, color 0.2s;
+  border-radius: 0 !important;
+}
+
+.leaflet-control-zoom-in:hover,
+.leaflet-control-zoom-out:hover {
+  background: #3F3F3F !important;
+  color: #FFD700 !important;
+}
+
+.leaflet-control-zoom .leaflet-control-zoom-in,
+.leaflet-control-zoom .leaflet-control-zoom-out {
+  border-bottom: 1px solid #E7E7E7 !important;
+}
+
+.leaflet-control-zoom .leaflet-control-zoom-out {
+  border-bottom: none !important;
+}
+
+@media (max-width: 600px) {
+  .leaflet-control-zoom-in,
+  .leaflet-control-zoom-out {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem !important;
+  }
+}
